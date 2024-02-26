@@ -1,21 +1,23 @@
+import DoublyLinkedList from "./DoublyLinkedList";
+
 export default class Stack<T> {
     public get length(): number {
         return this.inner.length;
     }
-    inner: Array<T> = [];
+    inner: DoublyLinkedList<T> = new DoublyLinkedList();
 
     constructor() {}
 
     push(item: T): void {
-        this.inner.push(item);
+        this.inner.append(item);
     }
     pop(): T | undefined {
-        return this.inner.pop();
+        return this.inner.removeAt(this.length - 1);
     }
     peek(): T | undefined {
         if (this.length === 0) {
             return undefined;
         }
-        return this.inner[this.length - 1];
+        return this.inner.get(this.length - 1);
     }
 }
