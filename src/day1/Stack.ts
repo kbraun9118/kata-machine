@@ -1,23 +1,32 @@
-import DoublyLinkedList from "./DoublyLinkedList";
+class Node<T> {
+    constructor(readonly item: T, public next?: Node<T>) {}
+}
 
 export default class Stack<T> {
-    public get length(): number {
-        return this.inner.length;
-    }
-    inner: DoublyLinkedList<T> = new DoublyLinkedList();
+    public length: number;
+    head?: Node<T>;
 
-    constructor() {}
+    constructor() {
+        this.length = 0;
+        this.head = undefined;
+    }
 
     push(item: T): void {
-        this.inner.append(item);
+      this.length++;
+        const newNode = new Node(item, this.head);
+        this.head = newNode;
     }
+    
     pop(): T | undefined {
-        return this.inner.removeAt(this.length - 1);
+      if (this.length > 0) {
+        this.length--;
+      }
+      const value = this.head?.item;
+      this.head = this.head?.next;
+      return value;
     }
+
     peek(): T | undefined {
-        if (this.length === 0) {
-            return undefined;
-        }
-        return this.inner.get(this.length - 1);
+      return this.head?.item;
     }
 }
