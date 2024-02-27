@@ -1,22 +1,45 @@
-import SinglyLinkedList from "./SinglyLinkedList";
+class Node<T> {
+    constructor(readonly item: T, public next?: Node<T>) {}
+}
 
 export default class Queue<T> {
-    inner: SinglyLinkedList<T> = new SinglyLinkedList();
-    get length() {
-        return this.inner.length;
+    length: number;
+    head?: Node<T>;
+    tail?: Node<T>;
+
+    constructor() {
+        this.length = 0;
+        this.head = undefined;
+        this.tail = undefined;
     }
 
-    constructor() {}
-
     enqueue(item: T): void {
-        this.inner.append(item);
+        const newNode = new Node(item);
+        this.length++;
+        if (!this.tail) {
+            this.head = newNode;
+            this.tail = newNode;
+            return;
+        }
+        this.tail.next = newNode;
+        this.tail = newNode;
     }
 
     deque(): T | undefined {
-        return this.inner.removeAt(0);
+        if (this.head) {
+            const item = this.head.item;
+            this.head = this.head.next;
+            this.length--;
+
+            if (!this.head) {
+                this.tail = undefined;
+            }
+            return item;
+        }
+        return undefined;
     }
 
     peek(): T | undefined {
-        return this.inner.get(0);
+      return this.head?.item;
     }
 }
