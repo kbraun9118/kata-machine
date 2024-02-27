@@ -21,4 +21,3 @@ test("RingBuffer", function() {
     expect(buffer.get(0)).toEqual(42);
 });
 
-

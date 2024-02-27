@@ -12,21 +12,19 @@ export default class Stack<T> {
     }
 
     push(item: T): void {
-      this.length++;
+        this.length++;
         const newNode = new Node(item, this.head);
         this.head = newNode;
     }
-    
+
     pop(): T | undefined {
-      if (this.length > 0) {
-        this.length--;
-      }
-      const value = this.head?.item;
-      this.head = this.head?.next;
-      return value;
+        this.length = Math.max(0, this.length - 1);
+        const value = this.head?.item;
+        this.head = this.head?.next;
+        return value;
     }
 
     peek(): T | undefined {
-      return this.head?.item;
+        return this.head?.item;
     }
 }
