@@ -1,6 +1,6 @@
 function walk(node: BinaryNode<number> | null, needle: number): boolean {
     if (!node) {
-      return false;
+        return false;
     }
     if (node.value === needle) {
         return true;
@@ -11,8 +11,7 @@ function walk(node: BinaryNode<number> | null, needle: number): boolean {
     } else {
         return walk(node.left, needle);
     }
-
 }
 export default function dfs(head: BinaryNode<number>, needle: number): boolean {
-  return walk(head, needle)
+    return walk(head, needle);
 }
