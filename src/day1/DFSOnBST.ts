@@ -1,4 +1,4 @@
-function walk(node: BinaryNode<number> | null, needle: number): boolean {
+function search(node: BinaryNode<number> | null, needle: number): boolean {
     if (!node) {
         return false;
     }
@@ -7,11 +7,11 @@ function walk(node: BinaryNode<number> | null, needle: number): boolean {
     }
 
     if (node.value < needle) {
-        return walk(node.right, needle);
+        return search(node.right, needle);
     } else {
-        return walk(node.left, needle);
+        return search(node.left, needle);
     }
 }
 export default function dfs(head: BinaryNode<number>, needle: number): boolean {
-    return walk(head, needle);
+    return search(head, needle);
 }
